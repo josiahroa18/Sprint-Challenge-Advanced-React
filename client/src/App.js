@@ -5,7 +5,7 @@ import './App.css';
 class App extends React.Component{
   render(){
     return(
-      <div>
+      <div className='App'>
         <h1>Women's World Cup</h1>
         <DataPage/>
       </div>
