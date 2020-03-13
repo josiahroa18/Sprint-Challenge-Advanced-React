@@ -5,12 +5,17 @@ import Table from './Table';
 
 function DataPage(){
     const response = useFetch('http://localhost:5000/api/players', null);
-    const formattedData = response.filter(woman => {
-        return woman.searches > 5;
-    })
+    let formattedData = [];
+
+    if(response){
+        formattedData = response.filter(woman => {
+            return woman.searches > 5;
+        })
+    }
 
     return (
         <div>
+            <h3>Women with searches above 5</h3>
             {response && (
                 <div data-testid='graph'>
                     <LineChart width={1000} height={300} data={formattedData}>
@@ -21,14 +26,14 @@ function DataPage(){
                     </LineChart>
                 </div>
             )}
-            <table>
+            <table data-testid='table'>
                 <tbody>
                     <tr>
                         <th>Name</th>
                         <th>Country</th>
                         <th>Searches</th>
                     </tr>
-                    {response.map(woman => {
+                    {response && response.map(woman => {
                         return <Table woman={woman} key={woman.id}/>
                     })}
                 </tbody>
